@@ -1,0 +1,15 @@
+.jtab-error {
+    background-color: rgba(255, 0, 0, 0.3);
+    border-radius: 7px;
+    padding: 0.5em;
+    font-size: smaller;
+}
+.jtab-error-title { 
+    font-weight: bold;
+}
+.jtab-error-message {
+    font-family: monospace;
+}
+.jtab-error-src {
+    font-family: monospace;
+}

@@ -1,8 +1,6 @@
 import { App, MarkdownRenderChild, Notice, Plugin, PluginSettingTab } from 'obsidian';
 import {randomUUID} from "crypto";
-const raphael = require("raphael");
 const jtab = require("jtab");
-import $ from "jquery"
 const OBSIDIAN_JTAB_CLASSES: {[jtype:string]: string} = {'jtab': "jtab", 'jtab-chordonly': "jtab chordonly", 'jtab-tabonly': "jtab tabsonly"};
 const OBSIDIAN_JTAB_TYPES = Object.keys(OBSIDIAN_JTAB_CLASSES);
 
@@ -38,9 +36,16 @@ class ObsidianJTabBlock extends MarkdownRenderChild {
 				debugger;
 				jtab.render(jdiv, "A B C" ); // jSrc);
 			} catch (e) {
-				this.containerEl.createSpan({text: `Invalid jTab. Please check your syntax and try again. ${e}`});
+				this.renderJTabError(e);
 			}
 		}
+	}
+
+	renderJTabError(e: any) {
+		const ediv = this.containerEl.createDiv({cls: 'jtab-error'});
+		ediv.createDiv({cls: 'jtab-error-title', text: 'Error: Failed to generated jTab.'});
+		ediv.createDiv({cls: 'jtab-error-message', text: `=> ${e.message}`});
+		ediv.createEl('pre').createEl('code', {cls: 'jtab-error-src', text: `\`\`\`${this.jtype}\n${this.src}\n\`\`\``});
 	}
 }
 
