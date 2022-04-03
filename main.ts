@@ -1,7 +1,8 @@
 import { App, MarkdownRenderChild, Notice, Plugin, PluginSettingTab } from 'obsidian';
 import {randomUUID} from "crypto";
-import $ from "jquery";
-const jQuery = $;
+const raphael = require("raphael");
+const jtab = require("jtab");
+import $ from "jquery"
 const OBSIDIAN_JTAB_CLASSES: {[jtype:string]: string} = {'jtab': "jtab", 'jtab-chordonly': "jtab chordonly", 'jtab-tabonly': "jtab tabsonly"};
 const OBSIDIAN_JTAB_TYPES = Object.keys(OBSIDIAN_JTAB_CLASSES);
 
@@ -22,7 +23,6 @@ class ObsidianJTabBlock extends MarkdownRenderChild {
 		this.src = src;
 		this.jtype = jtype;
 		this.renderId = `jtab-${randomUUID()}`
-		console.log(randomUUID())
 	}
 
 	onload(): void {
@@ -30,49 +30,24 @@ class ObsidianJTabBlock extends MarkdownRenderChild {
 	}
 
 	async renderJTab() {
-        const empty = this.containerEl.createSpan({
-            text: "Invalid jTab. Please check your syntax and try again."
-        });
 
 		if (this.src.trim().length) {
 			try {
-				const jdiv = this.containerEl.createDiv({
-					attr: {'id': this.renderId}, 
-					cls: OBSIDIAN_JTAB_CLASSES[this.jtype], 
-					text: `${this.renderId}: ${this.src}`
-				});
-				this.registerDomEvent(jdiv, 'load', (ev) => {
-					new Notice('Here');
-				});
-
-				empty.detach();
+				const jSrc = `<div class="${OBSIDIAN_JTAB_CLASSES[this.jtype]}">${this.src}</div>`;
+				const jdiv = this.containerEl.createDiv({attr: {'id': this.renderId}});
+				debugger;
+				jtab.render(jdiv, "A B C" ); // jSrc);
 			} catch (e) {
-				console.error(e);
-				new Notice(`Obsidian jTab Error:\nInvalid ${this.jtype} block =>\n${this.src?.trim()}`);
+				this.containerEl.createSpan({text: `Invalid jTab. Please check your syntax and try again. ${e}`});
 			}
 		}
-		this.registerEvent(
-            this.plugin.app.workspace.on(`${this.renderId}:unload`, () => {
-                this.containerEl.empty();
-                this.containerEl.createEl("pre").createEl("code", {
-                    text: `\`\`\`${this.jtype}\n${this.src}\`\`\``
-                });
-            })
-        );
 	}
-
 }
 
 export default class ObsidianJTab extends Plugin {
 	async onload() {
 		// This is just an informational page, no settings are loaded/saved
 		this.addSettingTab(new ObsidianJTabSettingsTab(this.app, this));
-
-		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
-		// Using this function will automatically remove the event listener when this plugin is disabled.
-		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
-			console.log('click', evt);
-		});
 
 		for (let jtype of OBSIDIAN_JTAB_TYPES) {
 			this.registerMarkdownCodeBlockProcessor(jtype, (src, el, ctx) => {

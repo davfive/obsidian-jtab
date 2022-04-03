@@ -22,5 +22,9 @@
 		"obsidian": "latest",
 		"tslib": "2.3.1",
 		"typescript": "4.4.4"
+	},
+	"dependencies": {
+		"jtab": "^1.3.2",
+		"raphael": "^2.3.0"
 	}
 }

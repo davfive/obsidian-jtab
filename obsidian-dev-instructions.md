@@ -2,6 +2,8 @@
 
 This is a sample plugin for Obsidian (https://obsidian.md).
 
+https://marcus.se.net/obsidian-plugin-docs/
+
 This project uses Typescript to provide type checking and documentation.
 The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
 
