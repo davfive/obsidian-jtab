@@ -1,8 +1,17 @@
+.jtab {
+    font-family: helvetica, arial, sans-serif !important;
+    font-size: 13px;
+}
+
+/*
+ * Obsidian JTab error display
+*/
 .jtab-error {
-    background-color: rgba(255, 0, 0, 0.3);
+    border: 2px solid rgba(255, 0, 0, 0.3);
     border-radius: 7px;
     padding: 0.5em;
     font-size: smaller;
+    position: relative;
 }
 .jtab-error-title { 
     font-weight: bold;
@@ -12,4 +21,12 @@
 }
 .jtab-error-src {
     font-family: monospace;
+}
+.jtab-error-help {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.jtab-error-help a {
+    font-size: smaller;
 }
