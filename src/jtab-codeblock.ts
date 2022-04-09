@@ -3,6 +3,10 @@ import {ObsidianJTabTypes, ObsidianJTabClassMap} from './jtab-settings'
 import {jtab} from './assets/js/jtab.tardate'
 
 const OBSIDIAN_JTAB_EXAMPLES_CODEBLOCK_SRC = `
+# ### jTab Examples
+# ----
+# Examples from the [jTab website](https://jtab.tardate.com/) <br/>  
+
 # #### Implicit render a chord-only phrase
 # \`E / / / | A7 / B7 / ||\`
 E / / / | A7 / B7 / ||
