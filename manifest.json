@@ -2,9 +2,8 @@
 	"id": "obsidian-jtab",
 	"name": "Obsidian jTab",
 	"minAppVersion": "0.12.0",
-	"description": "Adds jtab, jtab-tabsonly, and jtab-chordsonly codeblocks.",
+	"description": "Adds jtab, jtab-tabonly, and jtab-chordonly codeblocks.",
 	"author": "davfive",
 	"authorUrl": "https://github.com/davfive/obsidian-jtab",
-	"isDesktopOnly": false,
-	"version": "1.0.0"
+	"isDesktopOnly": false
 }
