@@ -9,14 +9,14 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 language       | description
 ---------------|-------------
 jtab           | jTab will auto-detect chords, tabs, or both
-jtab-examples  | Type an empty codeblock to see all of the [jTab examples](https://jtab.tardate.com/examples.htm)
+jtab-examples  | Type an empty codeblock to see all of the [jTab examples](https://jtabLG.tardate.com/examples.htm)
 
 #### Enhancements specific to Obsidian jTab
 1. _Supports multiple jTab lines per codeblock_  
    Each jTab line in a codeblock will be individually rendered
 
 2. _Supports markdown in codeblocks_  
-   Lines starting with \`#<space>\` (\`# \`) are rendered as markdown inside the rendered codeblock
+   Lines starting with \`#&lt;space&gt;\` (\`# \`) are rendered as markdown inside the rendered codeblock
 
 3. _Quick access to jtab-examples_  
    Change any jtab codeblock language to jtab-examples (with your jTab still inside) and it will render the examples AND preserve your jTab when you go to edit it again.
@@ -25,10 +25,10 @@ jtab-examples  | Type an empty codeblock to see all of the [jTab examples](https
 The [jTab Home Page](https://jtab.tardate.com/) has a [notation guide](https://jtab.tardate.com/index.htm#notation) and plenty of [examples](https://jtab.tardate.com/examples.htm).
 
 You can put all of the examples from the jTab website directly into your notes by simply adding this:
-~~~
-\`\`\`jtab-examples
-\`\`\`
-~~~
+~~~~
+```jtab-examples
+```
+~~~~
 
 #### jTab rendering caveats
 * _Is it "responsive"?_  
@@ -38,7 +38,7 @@ You can put all of the examples from the jTab website directly into your notes b
   The width of jTab renderings are as long as you make the jTab. It's up to you to break long jTab across multiple lines.
 
 * _What about chordonly and tabonly classes mentioned on the jTab site?_  
-  The jTab library auto-detects if there are chords and/or tabs when rendereing jTab. On the examples page it mentions using chordonly and tabonly classes. They have no effect on the generated tab. They are only there to adust the height of the surrounding div to match the height of the generaged svg. With modern broswers these classes no longer needed.
+  The jTab library auto-detects if there are chords and/or tabs when rendereing jTab. The chordonly and tabonly classes mentioned on the samples page do not affect the rendered image. They are a legacy helper class when the rendered image's enclosing div/parent couldn't properly auto-adjust for the height of the image. With modern broswers these classes no longer needed.
 
 #### Rendered jTab Examples
 
@@ -72,3 +72,19 @@ __jTab examples codeblock__
 ```
 ~~~~
 ![codeblock jtab-examples](./github-assets/codeblock-jtab-examples.jpg)
+	
+#### Open Source Attributions
+
+_Used by Obsidian jTab_
+* [jTab](https://jtab.tardate.com/)
+  * License LGPL v2.1 (it's in it's [js file](https://github.com/tardate/jtab/blob/master/javascripts/jtab.js), not in a normal GitHub license file
+  	Per LGPL rules, jTab is used unmodified *execpt*I do not modify the jTab source code other than to
+	* Disable jtab.renderimplicit() from running oninit. (it searches page for jtab elements and auto-renders them)
+	* Wrap library in ES6 to be allow use with node/ts
+
+_Used by jTab library_
+* [Raphael](https://github.com/DmitryBaranovskiy/raphael)
+  * [MIT License](https://github.com/DmitryBaranovskiy/raphael/blob/master/license.txt)
+* [jQuery](https://jquery.com/) - required by jTab - not used in my code
+  * [MIT License](https://github.com/jquery/jquery/blob/main/LICENSE.txt)
+

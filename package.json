@@ -8,8 +8,7 @@
 		"clean": "rm -rf dist",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"sass": "sass --no-source-map src/assets/scss/styles.scss dist/styles.css",
-		"meta": "mkdir -p dist && cp manifest.json versions.json dist",
-		"dist": "run-s clean build sass meta"
+		"dist": "run-s clean build sass && cp manifest.json dist/"
 	},
 	"keywords": [],
 	"author": "davfive",
