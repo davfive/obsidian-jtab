@@ -2,7 +2,7 @@
 	"id": "obsidian-jtab",
 	"name": "Obsidian jTab",
 	"minAppVersion": "0.12.0",
-	"description": "Adds jtab, jtab-tabonly, and jtab-chordonly codeblocks.",
+	"description": "Adds the ability to show guitar chords and tabs directly in your notes using jTab.",
 	"author": "davfive",
 	"authorUrl": "https://github.com/davfive/obsidian-jtab",
 	"isDesktopOnly": false
