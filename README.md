@@ -26,34 +26,36 @@ FYI, the underlying jTab library isn't responsive (i.e., auto-resizing based on 
 The [jTab Home Page](https://jtab.tardate.com/) has plenty of [examples](https://jtab.tardate.com/examples.htm).
 
 Typing an empty jtab-examples codeblock will render all of those examples in your
-\\\`\\\`\\\`jtab-examples
-\\\`\\\`\\\`
-
+~~~~
+```jtab-examples
+```
+~~~~
 
 #### Rendered jTab
 
-
-##### language=jtab
+~~~~
 ```jtab
 Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 ||
 ```
+~~~~
 ![codeblock jtab](./github-assets/codeblock-jtab.jpg)
 
-##### langauge=jtab-chordonly
+~~~~
 ```jtab-chordonly
 Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 ||
 ```
+~~~~
 ![codeblock jtab](./github-assets/codeblock-jtab-chordonly.jpg)
 
-##### language=jtab-tabonly
+~~~~
 ```jtab-tabonly
 Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 ||
 ```
+~~~~
 ![codeblock jtab](./github-assets/codeblock-jtab-tabonly.jpg)
 
-##### language=jtab-examples
+~~~~
 ```jtab-examples
 ```
+~~~~
 ![codeblock jtab-examples](./github-assets/codeblock-jtab-examples.jpg)
-
-
