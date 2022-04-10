@@ -60,7 +60,7 @@ __jTab with chords and tabs__
 Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 ||
 ```
 ~~~~
-![codeblock jtab](./github-assets/codeblock-jtab-tabs-and-chords.jpg)
+![codeblock jtab](./github-assets/codeblock-jtab-chords-and-tabs.jpg)
 
 __jTab examples codeblock__
 ~~~~
