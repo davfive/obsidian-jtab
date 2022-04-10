@@ -39,8 +39,10 @@ FYI, the underlying jTab library isn't responsive (i.e., auto-resizing based on 
 The [jTab Home Page](https://jtab.tardate.com/) has plenty of [examples](https://jtab.tardate.com/examples.htm).
 
 Typing an empty jtab-examples codeblock will render all of those examples in your
+~~~
 \\\`\\\`\\\`jtab-examples
 \\\`\\\`\\\`
+~~~
 
 #### Obsidian jTab on GitHub
 This plugin's source code and issue tracker can be found on [GitHub](https://github.com/davfive/obsidian-jtab)
