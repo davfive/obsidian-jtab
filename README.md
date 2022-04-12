@@ -6,14 +6,14 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 
 #### jTab codeblocks
 
-language       | description
----------------|-------------
-jtab           | jTab will auto-detect chords, tabs, or both
-jtab-examples  | Type an empty codeblock to see all of the [jTab examples](https://jtabLG.tardate.com/examples.htm)
+* ```` ```jtab````
+  jTab lines will be rendered. jTab auto-detects if chords, tabs, or both are present.
+* ```` ```jtab-examples````
+  Type an empty codeblock to see all of the [jTab examples](https://jtabLG.tardate.com/examples.htm)
 
 #### Enhancements specific to Obsidian jTab
 1. _Supports multiple jTab lines per codeblock_  
-   Each jTab line in a codeblock will be individually rendered
+   Each jTab line in a codeblock will be individually rendered. Blank lines will be ignored.
 
 2. _Supports markdown in codeblocks_  
    Lines starting with \`#&lt;space&gt;\` (\`# \`) are rendered as markdown inside the rendered codeblock
@@ -38,7 +38,7 @@ You can put all of the examples from the jTab website directly into your notes b
   The width of jTab renderings are as long as you make the jTab. It's up to you to break long jTab across multiple lines.
 
 * _What about chordonly and tabonly classes mentioned on the jTab site?_  
-  The jTab library auto-detects if there are chords and/or tabs when rendereing jTab. The chordonly and tabonly classes mentioned on the samples page do not affect the rendered image. They are a legacy helper class when the rendered image's enclosing div/parent couldn't properly auto-adjust for the height of the image. With modern broswers these classes no longer needed.
+  The jTab library auto-detects if there are chords and/or tabs when rendering jTab. The chordonly and tabonly classes mentioned on the examples page do not affect the rendered image. They are a legacy helper classes when the rendered image's enclosing div/parent couldn't properly auto-adjust for the height of the image. With modern broswers these classes no longer needed.
 
 #### Rendered jTab Examples
 
