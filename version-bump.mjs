@@ -2,6 +2,7 @@ import {basename} from 'path'
 import {spawnSync} from 'child_process'
 import { readFileSync, writeFileSync } from "fs"
 import simpleGit from 'simple-git'
+const git = simpleGit()
 
 const readFile = f => JSON.parse(readFileSync(f, "utf8"))
 const writeFile = (f, json) => writeFileSync(f, JSON.stringify(json, null, "\t"))
@@ -18,7 +19,8 @@ const commitVersion = (newVersion, commitMsg) => {
     catch (e) { console.error(e) }
 }
 
-const tagExists = async newVersion => await simpleGit.tags().includes(newVersion)
+const tags = await git.tags()
+const tagExists = tag => tags.all.includes(tag)
 
 const usage = msg => {
     if (msg) {
@@ -47,8 +49,7 @@ const package_json = readFile('package.json')
 package_json['version'] = newVersion
 writeFile('package.json', package_json)
 
-const manifest_json = readFi
-le('manifest.json')
+const manifest_json = readFile('manifest.json')
 manifest_json['version'] = newVersion
 writeFile('manifest.json', manifest_json)
 
