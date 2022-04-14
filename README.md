@@ -6,10 +6,12 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 
 #### jTab codeblocks
 
-* ```` ```jtab````
+* ```` ```jtab````  
   jTab lines will be rendered. jTab auto-detects if chords, tabs, or both are present.
-* ```` ```jtab-examples````
+  
+* ```` ```jtab-examples````  
   Type an empty codeblock to see all of the [jTab examples](https://jtabLG.tardate.com/examples.htm)
+  
 
 #### Enhancements specific to Obsidian jTab
 1. _Supports multiple jTab lines per codeblock_  
