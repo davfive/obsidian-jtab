@@ -10,7 +10,8 @@
 		"build-css": "sass --no-source-map src/assets/scss/styles.scss build/styles.css",
 		"copy-manifest": "cp manifest.json build/",
 		"build": "run-s clean build-js build-css copy-manifest",
-		"test": "eslint"
+		"eslint": "npx eslint",
+		"test": "run-s eslint"
 	},
 	"keywords": [],
 	"author": "davfive",
