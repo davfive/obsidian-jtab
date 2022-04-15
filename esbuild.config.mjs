@@ -27,5 +27,5 @@ esbuild.build({
 	logLevel: "info",
 	sourcemap: prod ? false : 'inline',
 	treeShaking: true,
-	outdir: 'dist',
+	outdir: 'build',
 }).catch(() => process.exit(1));

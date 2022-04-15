@@ -4,11 +4,13 @@
 	"description": "Adds the ability to show guitar chords and tabs directly in your notes using jTab.",
 	"main": "main.js",
 	"scripts": {
-		"dev": "run-s dist && node esbuild.config.mjs",
-		"clean": "rm -rf dist",
-		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"sass": "sass --no-source-map src/assets/scss/styles.scss dist/styles.css",
-		"dist": "run-s clean build sass && cp manifest.json dist/"
+		"dev": "run-s build && node esbuild.config.mjs",
+		"clean": "rm -rf build/",
+		"build-js": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"build-css": "sass --no-source-map src/assets/scss/styles.scss build/styles.css",
+		"copy-manifest": "cp manifest.json build/",
+		"build": "run-s clean build-js build-css copy-manifest",
+		"test": "eslint"
 	},
 	"keywords": [],
 	"author": "davfive",
