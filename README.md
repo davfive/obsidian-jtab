@@ -47,7 +47,7 @@ You can put all of the examples from the jTab website directly into your notes b
 __jTab with only chords__
 ~~~~
 ```jtab
-Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 ||
+E / / / A7 / B7 /
 ```
 ~~~~
 ![codeblock jtab chords](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-chords-only.jpg)
