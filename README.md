@@ -50,7 +50,7 @@ __jTab with only chords__
 Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 ||
 ```
 ~~~~
-![codeblock jtab chords](./docs/images/codeblock-jtab-chords-only.jpg)
+![codeblock jtab chords](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-chords-only.jpg)
 
 __jTab with only tabs__ (haha)
 ~~~~
@@ -58,7 +58,7 @@ __jTab with only tabs__ (haha)
 $4.7 $3.5 $2.5 $1.5 $1.7.$4.6 $2.5 $3.5 $1.7 | $1.8.$4.5 $2.5 $3.5 $1.8 $1.2.$4.4 $2.3 $3.2 $1.2 | $1.0.$4.3 $2.1 $3.2 $2.1 . $1.0 $2.1 $3.2 | $2.0.$3.0.$5.2 $2.1.$3.2.$5.0 $2.1.$3.2.$5.0 . $3.2.$5.0
 ```
 ~~~~
-![codeblock jtab tabs](./docs/images/codeblock-jtab-tab-only.jpg)
+![codeblock jtab tabs](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-tab-only.jpg)
 
 __jTab with chords and tabs__
 ~~~~
@@ -66,14 +66,14 @@ __jTab with chords and tabs__
 Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 ||
 ```
 ~~~~
-![codeblock jtab](./docs/images/codeblock-jtab-chords-and-tabs.jpg)
+![codeblock jtab](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-chords-and-tabs.jpg)
 
 __jTab examples codeblock__
 ~~~~
 ```jtab-examples
 ```
 ~~~~
-![codeblock jtab-examples](./docs/images/codeblock-jtab-examples.jpg)
+![codeblock jtab-examples](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-examples.jpg)
 	
 #### Open Source Attributions
 
