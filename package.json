@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-jtab",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"description": "Adds the ability to show guitar chords and tabs directly in your notes using jTab.",
 	"main": "main.js",
 	"scripts": {
