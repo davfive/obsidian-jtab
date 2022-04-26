@@ -1,9 +1,14 @@
 import { Plugin } from 'obsidian';
-import { ObsidianJTabSettingsTab, ObsidianJTabTypes } from './jtab-settings'
-import { ObsidianJTabCodeBlockRenderer } from './jtab-codeblock'
+import { ObsidianJTabSettingsTab, ObsidianJTabTypes, IObsidianJTabSettings, ObsidianJTabSettingsDefaults } from './jtab-settings';
+import { ObsidianJTabCodeBlockRenderer } from './jtab-codeblock';
+
 
 export default class ObsidianJTabPlugin extends Plugin {
+	settings: IObsidianJTabSettings;
+
 	async onload() {
+		await this.loadSettings();
+
 		// This is just an informational page, no settings are loaded/saved
 		this.addSettingTab(new ObsidianJTabSettingsTab(this.app, this));
 
@@ -17,5 +22,13 @@ export default class ObsidianJTabPlugin extends Plugin {
 
 	async onunload() {
 		// No cleanup required at the plugin level
+	}
+
+	async loadSettings() {
+		this.settings = Object.assign({}, ObsidianJTabSettingsDefaults, await this.loadData());
+	}
+
+	async saveSettings() {
+		await this.saveData(this.settings);
 	}
 }

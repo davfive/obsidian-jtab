@@ -1,7 +1,9 @@
-.jtab-settings {
-    [data-heading="Quick Start"] + table td:first-child {
-        // Don't let codeblock names wrap on -
-        white-space: nowrap;
+.jtab-settings-page {
+    .jtab-about {
+        [data-heading="Quick Start"] + table td:first-child {
+            // Don't let codeblock names wrap on -
+            white-space: nowrap;
+        }
     }
 }
 

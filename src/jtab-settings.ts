@@ -1,4 +1,5 @@
-import { App, MarkdownRenderer, Plugin, PluginSettingTab } from 'obsidian';
+import { App, MarkdownRenderer, PluginSettingTab, Setting } from 'obsidian';
+import ObsidianJTabPlugin from './main';
 
 export const ObsidianJTabClassMap: {[jtype:string]: string} = {
 	'jtab': "jtab", 
@@ -55,10 +56,30 @@ You can put all of the examples from the jTab website directly into your notes b
 This plugin's source code and issue tracker can be found on [GitHub](https://github.com/davfive/obsidian-jtab)
 `
 
+
+export interface IObsidianJTabSettings {
+	version: number;
+	colorClass: string;
+	colorCustomBackground: string;
+	colorCustomLines: string;
+	colorCustomText: string;
+	colorChordDot: string;
+	colorChordDotText: string;
+}
+
+export const ObsidianJTabSettingsDefaults: IObsidianJTabSettings = {
+	version: 1,
+	colorClass: 'jtab-colors-normal',
+	colorCustomBackground: '',
+	colorCustomLines: '',
+	colorCustomText: '',
+	colorChordDot: '',
+	colorChordDotText: '',
+}
+
 export class ObsidianJTabSettingsTab extends PluginSettingTab {
-	// This is just an informational page, no settings are loaded/saved
-    plugin: Plugin
-	constructor(app: App, plugin: Plugin) {
+    plugin: ObsidianJTabPlugin
+	constructor(app: App, plugin: ObsidianJTabPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
@@ -67,7 +88,31 @@ export class ObsidianJTabSettingsTab extends PluginSettingTab {
 		const {containerEl} = this;
 
 		containerEl.empty();
-		const el = containerEl.createDiv({cls: 'jtab-settings markdown-rendered'});
-		MarkdownRenderer.renderMarkdown(OBSIDIAN_JTAB_ABOUT, el, null, null)
+		containerEl.addClass('jtab-settings-page');
+
+		const elSettings = containerEl.createDiv({cls: 'jtab-settings'})
+
+		// Settings Form
+		elSettings.createEl('h2', 'Obsidian jTab Settings')
+		const elColorChooser = containerEl.createDiv();
+		
+		new Setting(elColorChooser)
+			.setName('jTab Color Scheme')
+			.setDesc('Specify how you want jTab tabs and chords to show in the notes')
+			.addDropdown(d => {
+				d.addOption('jtab-colors-normal', 'Normal');
+				d.addOption('jtab-colors-themed', 'Themed');
+				d.addOption('jtab-colors-contrast', 'High Contrast');
+				d.addOption('jtab-colors-custom', 'Custom');
+				d.setValue(this.plugin.settings.colorClass);
+				d.onChange(async v =>	{
+					this.plugin.settings.colorClass = v;
+					await this.plugin.saveSettings();
+				});
+			});
+		
+		const elAbout = containerEl.createDiv({cls: 'jtab-about'})
+		MarkdownRenderer.renderMarkdown(OBSIDIAN_JTAB_ABOUT, elAbout, null, null)
+	
 	}
 }
