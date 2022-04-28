@@ -29,7 +29,7 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 #### jTab Color Schemes
 jTab colors are now fully customizable. Normal for the old-school black on white look, Themed will follow your theme colors, or go crazy and mix 'em up yourself. If you select Normal or Themed and then just modify one color, it'll automatically switch to custom from there.
 
-![codeblock jtab chords](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-chords-only.jpg)
+![Color Settings Panel](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/settings-colors-panel.jpg)
 
 #### Learning jTab
 The [jTab Home Page](https://jtab.tardate.com/) has a [notation guide](https://jtab.tardate.com/index.htm#notation) and plenty of [examples](https://jtab.tardate.com/examples.htm).
