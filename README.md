@@ -20,7 +20,10 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 2. _Supports markdown in codeblocks_  
    Lines starting with \`#&lt;space&gt;\` (\`# \`) are rendered as markdown inside the rendered codeblock
 
-3. _Quick access to jtab-examples_  
+3. _Choose your own colors_
+   Choose from Normal (old-school black on white), Themed (follows your theme's colors), or set your own custom colors for background, lines, text, chord dots, and chord dot text. Try it out in settings.
+
+4. _Quick access to jtab-examples_  
    Change any jtab codeblock language to jtab-examples (with your jTab still inside) and it will render the examples AND preserve your jTab when you go to edit it again.
 
 #### Learning jTab

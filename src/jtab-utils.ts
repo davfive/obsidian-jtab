@@ -1,9 +1,8 @@
+import Color from 'color'
 import {IjTabColors} from './jtab-settings'
 
 // Ideally I would just pull this verbatim from the README.md file but esbuild won't let me
 export const jTabAboutMarkdown = `
-### Obsidian jTab Guide
-
 Obsidian jTab adds the ability to show guitar chords and tabs directly in your notes.
 
 It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
@@ -23,7 +22,10 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 2. _Supports markdown in codeblocks_
    Lines starting with \`#<space>\` (\`# \`) are rendered as markdown inside the rendered codeblock
 
-3. _Quick access to jtab-examples_
+3. _Fully customizable colors in settings_
+   Choose from Normal (black on white), Themed (follows your theme's colors), or set your own custom colors for background, lines, text, chord dots, and chord dot text. Try it out in settings.
+
+4. _Quick access to jtab-examples_
    Change any jtab codeblock language to jtab-examples (with your jTab still inside) and it will render the examples AND preserve your jTab when you go to edit it again.
 
 #### Learning jTab
@@ -58,7 +60,7 @@ export function unsetJTabColorStyles(colors: IjTabColors, el: HTMLElement): void
         // Gte rid of all --jtab-colors variables
         if (colors.customColors) {
             Object.keys(colors.customColors).forEach(key => {
-                el.style.removeProperty(`--jtab-colors-${key.toLowerCase}`)
+                el.style.removeProperty(`--jtab-colors-${key.toLowerCase()}`)
             })
         }
     }
@@ -71,8 +73,17 @@ export function setJTabColorStyles(colors: IjTabColors, el: HTMLElement): void {
         el.addClass(colors.className)
         if (colors.className == 'jtab-colors-custom') {
             Object.keys(colors.customColors).forEach(key => {
-                el.style.setProperty(`--jtab-colors-${key.toLowerCase}`, colors.customColors[key])
+                el.style.setProperty(`--jtab-colors-${key.toLowerCase()}`, colors.customColors[key])
             })
         }
+    }
+}
+
+export function parseColorToHexa(colorText: string): string {
+    try {
+        return Color(colorText).hex()
+    }
+    catch (e) {
+        return null
     }
 }

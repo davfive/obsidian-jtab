@@ -22,6 +22,7 @@ esbuild.build({
 		'electron',
 		...builtins],
 	format: 'cjs',
+	loader: {'.svg': 'text'},
 	watch: !prod,
 	target: 'es2016',
 	logLevel: "info",

@@ -1,0 +1,85 @@
+<svg height="100" version="1.1" width="200"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.5px; top: -0.515625px;">
+    <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.3.0</desc>
+    <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+    <path fill="none" stroke="#dcddde" d="M16,10L16,90" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M16,10L40,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M16,26L40,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M16,42L40,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M16,58L40,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M16,74L40,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M16,90L40,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="24" y="34" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="14px" stroke="#dcddde" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 14px;">
+        <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">T</tspan>
+    </text>
+    <text x="24" y="50" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="14px" stroke="#dcddde" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 14px;">
+        <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">A</tspan>
+    </text>
+    <text x="24" y="66" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="14px" stroke="#dcddde" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 14px;">
+        <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">B</tspan>
+    </text>
+    <path fill="none" stroke="#dcddde" d="M40,10L64,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M40,26L64,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M40,42L64,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M40,58L64,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M40,74L64,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M40,90L64,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="52" y="90" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="16px" stroke="none" fill="#dcddde" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 16px;">
+        <tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan>
+    </text>
+    <path fill="none" stroke="#dcddde" d="M64,10L80,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M64,26L80,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M64,42L80,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M64,58L80,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M64,74L80,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M64,90L80,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="72" y="90" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="16px" stroke="none" fill="#dcddde" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 16px;">
+        <tspan dy="90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></tspan>
+    </text>
+    <path fill="none" stroke="#dcddde" d="M80,10L104,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M80,26L104,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M80,42L104,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M80,58L104,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M80,74L104,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M80,90L104,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="92" y="74" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="16px" stroke="none" fill="#dcddde" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 16px;">
+        <tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">7</tspan>
+    </text>
+    <path fill="none" stroke="#dcddde" d="M104,10L128,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M104,26L128,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M104,42L128,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M104,58L128,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M104,74L128,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M104,90L128,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="116" y="58" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="16px" stroke="none" fill="#dcddde" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 16px;">
+        <tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">6</tspan>
+    </text>
+    <path fill="none" stroke="#dcddde" d="M128,10L152,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M128,26L152,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M128,42L152,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M128,58L152,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M128,74L152,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M128,90L152,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="140" y="90" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="16px" stroke="none" fill="#dcddde" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 16px;">
+        <tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">6</tspan>
+    </text>
+    <path fill="none" stroke="#dcddde" d="M152,10L176,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M152,26L176,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M152,42L176,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M152,58L176,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M152,74L176,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M152,90L176,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="164" y="90" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="16px" stroke="none" fill="#dcddde" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 16px;">
+        <tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">5</tspan>
+    </text>
+    <path fill="none" stroke="#dcddde" d="M176,10L200,10" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M176,26L200,26" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M176,42L200,42" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M176,58L200,58" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M176,74L200,74" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <path fill="none" stroke="#dcddde" d="M176,90L200,90" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text x="188" y="74" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="16px" stroke="none" fill="#dcddde" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 16px;">
+        <tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">7</tspan>
+    </text>
+</svg>

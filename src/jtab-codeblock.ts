@@ -3,7 +3,7 @@ import {MarkdownRenderChild, MarkdownRenderer} from 'obsidian';
 import {jTabTypes, jTabClassMap} from './jtab-settings'
 import {setJTabColorStyles} from './jtab-utils'
 import jTabPlugin from './main'
-import {jtab} from './assets/js/jtab.tardate'
+import {jtab} from '../assets/js/jtab.tardate'
 
 const OBSIDIAN_JTAB_EXAMPLES_CODEBLOCK_SRC = `
 # ### jTab Examples

@@ -7,7 +7,7 @@
 		"dev": "run-s build && node esbuild.config.mjs",
 		"clean": "rm -rf build/",
 		"build-js": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"build-css": "sass --no-source-map src/assets/scss/styles.scss build/styles.css",
+		"build-css": "sass --no-source-map assets/scss/styles.scss build/styles.css",
 		"copy-manifest": "cp manifest.json build/",
 		"build": "run-s clean build-js build-css copy-manifest",
 		"eslint": "npx eslint",
@@ -17,11 +17,13 @@
 	"author": "davfive",
 	"license": "MIT",
 	"devDependencies": {
+		"@types/color": "3.0.3",
 		"@types/jquery": "3.5.14",
 		"@types/node": "16.11.6",
 		"@typescript-eslint/eslint-plugin": "5.2.0",
 		"@typescript-eslint/parser": "5.2.0",
 		"builtin-modules": "3.2.0",
+		"color": "4.2.3",
 		"esbuild": "0.13.12",
 		"jquery": "3.6.0",
 		"npm-run-all": "4.1.5",
@@ -29,7 +31,7 @@
 		"raphael": "2.3.0",
 		"rxjs": "7.5.5",
 		"sass": "1.50.0",
-		"simple-git": "^3.6.0",
+		"simple-git": "3.6.0",
 		"tslib": "2.3.1",
 		"typescript": "4.4.4"
 	}
