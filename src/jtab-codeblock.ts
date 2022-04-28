@@ -1,5 +1,8 @@
-import { MarkdownRenderChild, MarkdownRenderer, Plugin } from 'obsidian';
-import {ObsidianJTabTypes, ObsidianJTabClassMap} from './jtab-settings'
+import {Subscription} from 'rxjs';
+import {MarkdownRenderChild, MarkdownRenderer} from 'obsidian';
+import {jTabTypes, jTabClassMap} from './jtab-settings'
+import {setJTabColorStyles} from './jtab-utils'
+import jTabPlugin from './main'
 import {jtab} from './assets/js/jtab.tardate'
 
 const OBSIDIAN_JTAB_EXAMPLES_CODEBLOCK_SRC = `
@@ -51,19 +54,22 @@ Cm:1 Cm:2 Cm:3 Cm:4 Cm:5
 Eb7:1 Eb7:2 Eb7:3 Eb7:4 Eb7:5
 `
 type CodeBlockPart = {type:string, src:string};
-export class ObsidianJTabCodeBlockRenderer extends MarkdownRenderChild {
+export class jTabCodeBlockRenderer extends MarkdownRenderChild {
 	private _jTabDestroyListener: () => void = null;
 	private _jTabDiv: HTMLElement = null;
+	private _settingsUpdatesSub: Subscription;
+
 	constructor(
-		public plugin: Plugin,
+		public plugin: jTabPlugin,
 		public src: string,
 		public containerEl: HTMLElement,
 		public jtype: string
 	) {
 		super(containerEl);
-		if (!ObsidianJTabTypes.includes(this.jtype)) {
+		if (!jTabTypes.includes(this.jtype)) {
 			throw new Error(`Unknown jTab type '${this.jtype}'`);
 		}
+		this._settingsUpdatesSub = null;
 	}
 
 	async onload() {
@@ -86,7 +92,10 @@ export class ObsidianJTabCodeBlockRenderer extends MarkdownRenderChild {
 								break;
 							case 'jtab':
 								tgtDiv = this._jTabDiv.createDiv({
-									cls: 'jtab-renderer ' + ObsidianJTabClassMap[this.jtype]
+									cls: [
+										'jtab-renderer', 
+										jTabClassMap[this.jtype]
+									].join(' ')
 								});
 					
 								jtab.render(tgtDiv, codeBlockPart.src);
@@ -96,6 +105,9 @@ export class ObsidianJTabCodeBlockRenderer extends MarkdownRenderChild {
 								break;
 						}
 					});
+					this._settingsUpdatesSub = this.plugin.settingsUpdates.subscribe({
+						next: (settings) => setJTabColorStyles(settings.colors, this._jTabDiv)
+					})
 				} catch (e) {
 					this._cleanup();
 					this._displayJTabError(e);
@@ -116,6 +128,9 @@ export class ObsidianJTabCodeBlockRenderer extends MarkdownRenderChild {
 		if (this._jTabDestroyListener) {
 			this._jTabDestroyListener();
 			this._jTabDestroyListener = null;
+		}
+		if (this._settingsUpdatesSub) {
+			this._settingsUpdatesSub.unsubscribe();
 		}
 	}
 
