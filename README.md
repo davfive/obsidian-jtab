@@ -26,6 +26,11 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 4. _Quick access to jtab-examples_  
    Change any jtab codeblock language to jtab-examples (with your jTab still inside) and it will render the examples AND preserve your jTab when you go to edit it again.
 
+#### jTab Color Schemes
+jTab colors are now fully customizable. Normal for the old-school black on white look, Themed will follow your theme colors, or go crazy and mix 'em up yourself. If you select Normal or Themed and then just modify one color, it'll automatically switch to custom from there.
+
+![codeblock jtab chords](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-chords-only.jpg)
+
 #### Learning jTab
 The [jTab Home Page](https://jtab.tardate.com/) has a [notation guide](https://jtab.tardate.com/index.htm#notation) and plenty of [examples](https://jtab.tardate.com/examples.htm).
 
