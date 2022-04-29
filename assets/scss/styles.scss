@@ -1,3 +1,36 @@
+.jtab-colors-classic {
+    --jtab-colors-background: white;
+    --jtab-colors-lines: black;
+    --jtab-colors-text: black;
+    --jtab-colors-chorddot: black;
+    --jtab-colors-chorddottext: white;
+}
+
+.jtab-colors-themed {
+    --jtab-colors-background: var(--background-primary);
+    --jtab-colors-lines: var(--text-normal);
+    --jtab-colors-text: var(--text-normal);
+    --jtab-colors-chorddot: var(--text-normal);
+    --jtab-colors-chorddottext: var(--text-highlight);
+}
+
+.jtab > div[id^="builder_"] {
+    /* Even out the right margin with the forced left margin of the svg */
+    display: inline-block; padding-right: 15px;
+    background: var(--jtab-colors-background);
+
+    svg {
+        /* jtab color scheme */
+        background: none;
+        path  { stroke: var(--jtab-colors-lines); fill: none; } 
+        text  { stroke: none; fill: var(--jtab-colors-text); }
+        circle {
+            stroke: none; fill: var(--jtab-colors-chorddot);
+            &+ text {stroke: none; fill: var(--jtab-colors-chorddottext); }
+        }
+    }
+}
+
 .jtab-settings-page {
     .jtab-about {
         [data-heading="Quick Start"] + table td:first-child {
@@ -61,56 +94,6 @@
     }
 }
 
-.jtab-colors-classic {
-    --jtab-colors-background: white;
-    --jtab-colors-lines: black;
-    --jtab-colors-text: black;
-    --jtab-colors-chorddot: black;
-    --jtab-colors-chorddottext: white;
-}
-
-.jtab-colors-themed {
-    --jtab-colors-background: var(--background-primary);
-    --jtab-colors-lines: var(--text-normal);
-    --jtab-colors-text: var(--text-normal);
-    --jtab-colors-chorddot: var(--text-normal);
-    --jtab-colors-chorddottext: var(--text-highlight);
-}
-
-.jtab > div[id^="builder_"] {
-    /* Even out the right margin with the forced left margin of the svg */
-    display: inline-block; padding-right: 15px;
-    background: var(--jtab-colors-background);
-
-    svg {
-        /* jtab color scheme */
-        background: none;
-        path  { stroke: var(--jtab-colors-lines); fill: none; } 
-        text  { stroke: none; fill: var(--jtab-colors-text); }
-        circle {
-            stroke: none; fill: var(--jtab-colors-chorddot);
-            &+ text {stroke: none; fill: var(--jtab-colors-chorddottext); }
-        }
-    }
-} 
-
-.jtab-colors-custom {
-    /* path=lines, circle=chord dot */
-    svg {
-        background: pink;
-        path  { stroke: yellow; }                     /* lines */
-        text  { stroke: red; fill: red; }           /* text */
-        circle {
-            stroke: white; fill: white;             /* dot */
-            &+ text {stroke: green; fill: green; }  /* dot number */
-        }
-    } 
-}
-
-
-/*
- * Obsidian JTab error display
-*/
 .jtab-error {
     border: 2px solid rgba(255, 0, 0, 0.3);
     border-radius: 7px;

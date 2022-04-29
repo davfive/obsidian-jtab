@@ -6,10 +6,9 @@
 	"scripts": {
 		"dev": "run-s build && node esbuild.config.mjs",
 		"clean": "rm -rf build/",
-		"build-js": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"build-css": "sass --no-source-map assets/scss/styles.scss build/styles.css",
+		"esbuild": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"copy-manifest": "cp manifest.json build/",
-		"build": "run-s clean build-js build-css copy-manifest",
+		"build": "run-s clean esbuild copy-manifest",
 		"eslint": "npx eslint",
 		"test": "run-s eslint"
 	},
@@ -26,13 +25,13 @@
 		"builtin-modules": "3.2.0",
 		"color": "4.2.3",
 		"esbuild": "0.13.12",
+		"esbuild-sass-plugin": "2.2.6",
 		"jquery": "3.6.0",
 		"lodash": "4.17.21",
 		"npm-run-all": "4.1.5",
 		"obsidian": "0.14.4",
 		"raphael": "2.3.0",
 		"rxjs": "7.5.5",
-		"sass": "1.50.0",
 		"simple-git": "3.6.0",
 		"tslib": "2.3.1",
 		"typescript": "4.4.4"
