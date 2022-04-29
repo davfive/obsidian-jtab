@@ -3,6 +3,7 @@ import {jTabAboutMarkdown, parseColorToHexa, setJTabColorStyles} from './jtab-ut
 import jTabPlugin from './main'
 import ChordExampleSVG from '../assets/img/jtab-example-chord.svg'
 import TabExampleSVG from '../assets/img/jtab-example-tab.svg'
+import {cloneDeep, isEqual} from 'lodash'
 
 export interface IjTabCustomColors {
 	[index:string]:string,
@@ -66,14 +67,16 @@ interface IcolorFieldsInfo {
 
 export class jTabSettingsTab extends PluginSettingTab {
     plugin: jTabPlugin
+	_settingsSnapshot: IjTabSettings
 	_colorTypeDropdown: DropdownComponent
 	_colorFieldsInfo: IcolorFieldsInfo
 	_elColorExamples: HTMLElement
 
 	constructor(app: App, plugin: jTabPlugin) {
-		super(app, plugin)
-		this.plugin = plugin
-		this._colorTypeDropdown = null
+		super(app, plugin);
+		this.plugin = plugin;
+		this._settingsSnapshot = cloneDeep(this.plugin.settings);
+		this._colorTypeDropdown = null;
 		this._colorFieldsInfo = {
 			background: {name: 'Background', colorText: null, colorPicker: null },
 			lines: {name: 'Lines', colorText: null, colorPicker: null },
@@ -81,7 +84,7 @@ export class jTabSettingsTab extends PluginSettingTab {
 			chordDot: {name: 'Chord Dot', colorText: null, colorPicker: null },
 			chordDotText: {name: 'Chord Dot Text', colorText: null, colorPicker: null },
 		};
-		this._elColorExamples = null
+		this._elColorExamples = null;
 	}
 
 	display(): void {
@@ -156,7 +159,10 @@ export class jTabSettingsTab extends PluginSettingTab {
 	async hide() {
 		// Hijack hide so I know when to save the settings and am not
 		// broadcasting changes while people are still tinkering
-		await this.plugin.saveSettings();
+		if (! isEqual(this.plugin.settings, this._settingsSnapshot)) {
+			await this.plugin.saveSettings();
+			this._settingsSnapshot = cloneDeep(this.plugin.settings);
+		}
 		super.hide()
 	}
 
