@@ -1,6 +1,6 @@
 import { Plugin } from 'obsidian';
 import { BehaviorSubject } from 'rxjs'
-import { jTabSettingsTab, jTabTypes, IjTabSettings, jTabSettingsDefaults } from './jtab-settings';
+import { jTabSettingsTab, jTabTypes, IjTabSettings, jTabSettingsDefaults, jTabColorSchemes} from './jtab-settings';
 import { jTabCodeBlockRenderer } from './jtab-codeblock';
 import { parseColorToHexa } from './jtab-utils'
 
@@ -30,18 +30,23 @@ export default class jTabPlugin extends Plugin {
 
 	async loadSettings() {
 		this.settings = Object.assign({}, jTabSettingsDefaults, await this.loadData());
-		this._ensureValidCustomColors()
+		this._ensureValidSettings()
 	}
 
 	async saveSettings() {
-		this._ensureValidCustomColors()
+		this._ensureValidSettings()
 		await this.saveData(this.settings);
 		this.settingsUpdates.next(this.settings);
 	}
 
-	private _ensureValidCustomColors() {
+	private _ensureValidSettings() {
+		// Known color schemes
+		if (! [...jTabColorSchemes.values()].includes(this.settings.colors.className)) {
+			this.settings.colors.className = jTabColorSchemes.get("Classic")
+		}
+
+		// Known custom colors
 		if (Object.values(this.settings.colors.customColors).some(v => {
-			console.log(v);
 			return null == parseColorToHexa(v)
 		})) {
 			this.settings = Object.assign({}, jTabSettingsDefaults.colors.customColors);

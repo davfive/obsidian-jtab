@@ -31,10 +31,17 @@ export const jTabClassMap: {[jtype:string]: string} = {
 }
 export const jTabTypes = Object.keys(jTabClassMap)
 
+export const jTabColorSchemes = new Map<string, string>([
+	// Using Map to preserve order since this is the dropdown
+	["Classic", "jtab-colors-classic"],
+	["Themed", "jtab-colors-themed"],
+	["Custom", "jtab-colors-custom"]
+])
+
 export const jTabSettingsDefaults: IjTabSettings = {
 	version: 1,
 	colors: {
-		className: 'jtab-colors-normal',
+		className: 'jtab-colors-classic',
 		customColors: {
 			background: 'white',
 			lines: 'black',
@@ -96,9 +103,9 @@ export class jTabSettingsTab extends PluginSettingTab {
 		.setDesc('Specify how you want jTab tabs and chords to show in the notes')
 		.addDropdown(d => {
 			this._colorTypeDropdown = d
-			d.addOption('jtab-colors-normal', 'Normal')
-			d.addOption('jtab-colors-themed', 'Themed')
-			d.addOption('jtab-colors-custom', 'Custom')
+			for (const [name, cls] of jTabColorSchemes.entries()) {
+				d.addOption(cls, name)
+			}
 			d.setValue(this.plugin.settings.colors.className)
 			d.onChange(async v => {
 				this.plugin.settings.colors.className = v
