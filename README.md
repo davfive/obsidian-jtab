@@ -83,7 +83,10 @@ __jTab examples codeblock__
 ~~~~
 ![codeblock jtab-examples](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/codeblock-jtab-examples.jpg)
 	
-#### Open Source Attributions
+#### Attributions
+
+_Community Support_
+* Thanks for @RobColes for suggesting #5 (customizing colors) and being a beta tester.
 
 _Used by Obsidian jTab_
 * [jTab](https://jtab.tardate.com/)
