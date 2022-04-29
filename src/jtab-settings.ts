@@ -175,7 +175,8 @@ export class jTabSettingsTab extends PluginSettingTab {
 				this._colorTypeDropdown.setValue(this.plugin.settings.colors.className)
 				this.plugin.settings.colors[field] = v	
 				this._colorFieldsInfo[field].colorText.setValue(v)
-	
+
+				this._saveAllColorFieldsAsCustom()
 				setJTabColorStyles(this.plugin.settings.colors, this._elColorExamples)
 			})
 		textField.inputEl.type = 'color' // Make it a color picker
@@ -193,12 +194,19 @@ export class jTabSettingsTab extends PluginSettingTab {
 					this.plugin.settings.colors.customColors[field] = color
 					this._colorFieldsInfo[field].colorPicker.setValue(color)
 	
+					this._saveAllColorFieldsAsCustom()
 					setJTabColorStyles(this.plugin.settings.colors, this._elColorExamples)
 				}
 			})	
 	}			
 
 	private _copyColorStylesToFields() {
+		// _copyColorStylesToFields() temporarily updates the color fields
+		// to display what is showing in the example. This is so as to not
+		// overwrite the saved settings for custom just by viewing Classic
+		// or themed. If someone actually modifies a color field, the
+		// color fields will all be saved-as to the settings with
+		// _saveAllColorFieldsAsCustom
 		const setFieldColor = (field: string, color: string) => {
 			const hexa = parseColorToHexa(color)
 			if (hexa) {
@@ -223,5 +231,16 @@ export class jTabSettingsTab extends PluginSettingTab {
 		setFieldColor('chordDot', colorValue(svgSel('circle'), 'fill'))
 		setFieldColor('chordDotText', colorValue(svgSel('circle + text'), 'fill'))
 	}
+
+	private _saveAllColorFieldsAsCustom() {
+		Object.keys(this._colorFieldsInfo).forEach(field => {
+			const color = this._colorFieldsInfo[field].colorText.getValue()
+			if (parseColorToHexa(color)) {
+				// Only do it if the color is valid
+				this.plugin.settings.colors.customColors[field] = color;
+			}
+		})
+	}
+
 }
 
