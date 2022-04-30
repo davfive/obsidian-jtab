@@ -27,7 +27,7 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
    Change any jtab codeblock language to jtab-examples (with your jTab still inside) and it will render the examples AND preserve your jTab when you go to edit it again.
 
 #### jTab Color Schemes
-jTab colors are now fully customizable. Classic for the old-school black on white look, Themed will follow your theme colors, or go crazy and mix 'em up yourself with Custom. If you select Classic or Themed and then just modify one color, it'll automatically switch to custom from there.
+jTab colors are now fully customizable with a Live Preview available in settings. Classic for the old-school black on white look, Themed will follow your theme colors. Start with one of those and change one color or go crazy and mix 'em up yourself with Custom.
 
 ![Color Settings Panel](https://raw.githubusercontent.com/davfive/obsidian-jtab/main/docs/images/settings-colors-panel.jpg)
 
