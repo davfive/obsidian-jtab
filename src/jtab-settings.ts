@@ -28,7 +28,8 @@ export interface IjTabSettings {
 
 export const jTabClassMap: {[jtype:string]: string} = {
 	'jtab': "jtab", 
-	'jtab-examples': 'jtab'
+	'jtab-examples': 'jtab',
+	'jtab-chords': 'jtab'
 }
 export const jTabTypes = Object.keys(jTabClassMap)
 
@@ -49,7 +50,8 @@ export const jTabSettingsDefaults: IjTabSettings = {
 			text: 'black',
 			chordDot: 'black',
 			chordDotText: 'white',
-		}}
+		}
+	},
 }
 
 interface IcolorFieldInfo {
@@ -102,20 +104,20 @@ export class jTabSettingsTab extends PluginSettingTab {
 
 		// Color Scheme Type Chooser
 		new Setting(elSettings.createDiv())
-		.setName('jTab Color Scheme')
-		.setDesc('Specify how you want jTab tabs and chords to show in the notes')
-		.addDropdown(d => {
-			this._colorTypeDropdown = d
-			for (const [name, cls] of jTabColorSchemes.entries()) {
-				d.addOption(cls, name)
-			}
-			d.setValue(this.plugin.settings.colors.className)
-			d.onChange(async v => {
-				this.plugin.settings.colors.className = v
-				setJTabColorStyles(this.plugin.settings.colors, this._elColorExamples)
-				this._copyColorStylesToFields();
-			})
-		});
+			.setName('Color Scheme')
+			.setDesc('Specify how you want jTab tabs and chords to show in the notes')
+			.addDropdown(d => {
+				this._colorTypeDropdown = d
+				for (const [name, cls] of jTabColorSchemes.entries()) {
+					d.addOption(cls, name)
+				}
+				d.setValue(this.plugin.settings.colors.className)
+				d.onChange(async v => {
+					this.plugin.settings.colors.className = v
+					setJTabColorStyles(this.plugin.settings.colors, this._elColorExamples)
+					this._copyColorStylesToFields();
+				})
+			});
 
 		// Color Details Sections (examples and color fields)
 		const elColorDetails = elSettings.createDiv({cls: 'jtab-settings-colors-details'});

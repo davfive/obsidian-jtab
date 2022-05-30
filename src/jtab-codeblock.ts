@@ -1,9 +1,8 @@
 import {Subscription} from 'rxjs';
 import {MarkdownRenderChild, MarkdownRenderer} from 'obsidian';
 import {jTabTypes, jTabClassMap} from './jtab-settings'
-import {setJTabColorStyles} from './jtab-utils'
+import {jtab, setJTabColorStyles} from './jtab-utils'
 import jTabPlugin from './main'
-import {jtab} from '../assets/js/jtab.tardate'
 
 const OBSIDIAN_JTAB_EXAMPLES_CODEBLOCK_SRC = `
 # ### jTab Examples
@@ -76,7 +75,17 @@ export class jTabCodeBlockRenderer extends MarkdownRenderChild {
 		if (this.jtype === 'jtab-examples') {
 			// Show examples. See https://jtab.tardate.com/examples.htm
 			this.src = OBSIDIAN_JTAB_EXAMPLES_CODEBLOCK_SRC;
+		} else if (this.jtype === 'jtab-chords') {
+			const chordsPerLine = 5;
+			const chordList = jtab.getChordList();
+			this.src = ''
+				+ '# #### jTab Chord List\n'
+				+ '# (Sorted CDEFGAB)\n'
+				+ '# ' + chordList.map(
+					(e,i) => (i%chordsPerLine === 0 ? chordList.slice(i,i+chordsPerLine).join(' ') : null)
+				).filter(e => e).join('\n# ')
 		}
+
 		const codeBlockParts = this._parseCodeBlock()
 		if (codeBlockParts.length) {
 			this._jTabDiv = this.containerEl.createDiv({cls: 'jtab-codeblock'});
@@ -97,7 +106,7 @@ export class jTabCodeBlockRenderer extends MarkdownRenderChild {
 										jTabClassMap[this.jtype]
 									].join(' ')
 								});
-					
+								// @ts-ignore
 								jtab.render(tgtDiv, codeBlockPart.src);
 								if (!tgtDiv.classList.contains("rendered")) {
 									throw new Error("Invalid jTab syntax");
