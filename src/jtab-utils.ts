@@ -1,6 +1,8 @@
 import Color from 'color'
 import {IjTabColors} from './jtab-settings'
 
+export {jtab} from '../assets/js/jtab.tardate'
+
 // Ideally I would just pull this verbatim from the README.md file but esbuild won't let me
 export const jTabAboutMarkdown = `
 Obsidian jTab adds the ability to show guitar chords and tabs directly in your notes.
@@ -22,10 +24,13 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 2. _Supports markdown in codeblocks_
    Lines starting with \`#<space>\` (\`# \`) are rendered as markdown inside the rendered codeblock
 
-3. _Fully customizable colors in settings_
+3. _Added jtab-chords codeblock_
+   Use 'jtab-chords' codeblock to show ALL named chords that can be used in a jtab codeblock. As with the jtab-examples codeblock, your codeblock content will be preserved.
+
+4. _Fully customizable colors in settings_
    Choose from Normal (black on white), Themed (follows your theme's colors), or set your own custom colors for background, lines, text, chord dots, and chord dot text. Try it out in settings.
 
-4. _Quick access to jtab-examples_
+5. _Quick access to jtab-examples_
    Change any jtab codeblock language to jtab-examples (with your jTab still inside) and it will render the examples AND preserve your jTab when you go to edit it again.
 
 #### Learning jTab

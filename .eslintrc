@@ -1,7 +1,8 @@
 {
     "root": true,
     "parser": "@typescript-eslint/parser",
-    "env": { "node": true },
+    "env": { "browser": true, "node": true },
+    "globals": { "canvas": true },
     "plugins": [
       "@typescript-eslint"
     ],
