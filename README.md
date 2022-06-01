@@ -11,7 +11,9 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
   
 * ```` ```jtab-examples````  
   Type an empty codeblock to see all of the [jTab examples](https://jtab.tardate.com/examples.htm)
-  
+
+* ```` ```jtab-chords````  
+  Type an empty codeblock to see all available chords (names only). Cut/paste anything off the list into a normal jtab codeblock to see the chord charts.
 
 #### Enhancements specific to Obsidian jTab
 1. _Supports multiple jTab lines per codeblock_  
