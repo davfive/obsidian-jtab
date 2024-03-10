@@ -5,7 +5,9 @@ export {jtab} from './jtab-tardate'
 
 // Ideally I would just pull this verbatim from the README.md file but esbuild won't let me
 export const jTabAboutMarkdown = `
-Obsidian jTab adds the ability to show guitar chords and tabs directly in your notes.
+### Guide for jTab Guitar Codeblocks
+
+jTab Guitar Codeblocks adds the ability to show guitar chords and tabs directly in your notes.
 
 It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 
@@ -17,7 +19,7 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 * \`\`\`\` \`\`\`jtab-examples\`\`\`\`
   Type an empty codeblock to see all of the [jTab examples](https://jtab.tardate.com/examples.htm)
 
-#### Enhancements specific to Obsidian jTab
+#### Enhancements specific to jTab Guitar Codeblocks
 1. _Supports multiple jTab lines per codeblock_
    Each jTab line in a codeblock will be individually rendered
 
@@ -52,7 +54,7 @@ You can put all of the examples from the jTab website directly into your notes b
 * _What about chordonly and tabonly classes mentioned on the jTab site?_
   The jTab library auto-detects if there are chords and/or tabs when rendereing jTab. On the examples page it mentions using chordonly and tabonly classes. They have no effect on the generated tab. They are only there to adust the height of the surrounding div to match the height of the generaged svg. With modern broswers these classes no longer needed.
 
-#### Obsidian jTab on GitHub
+#### jTab Guitar Codeblocks on GitHub
 This plugin's source code and issue tracker can be found on [GitHub](https://github.com/davfive/obsidian-jtab)
 `
 

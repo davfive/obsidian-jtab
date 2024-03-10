@@ -1,5 +1,6 @@
-/* - Obsidian jTab Addition - */
-// import Raphael, { fn } from "raphael";
+/* - jTab Guitar Codeblocks Addition - */
+import jQuery, { grep } from "jquery";
+import Raphael, { fn } from "raphael";
 import ChordLibrary from "./jtab.chords";
 
 const {jtab, jtabChord} = (function() {
@@ -119,25 +120,15 @@ const {jtab, jtabChord} = (function() {
         return false
       }
 
-      if (! (chordName in this.Chords)) {
-        this.Chords[chordName] = {}
-      }
-      Object.entries({chord, caged, custom}).forEach(entry => {
-        const [chordType, chordSpec] = entry
-        this.Chords[chordName][chordType] = chordSpec
-      })
+    if (! (chordName in this.Chords)) {
+      this.Chords[chordName] = {}
     }
-  };
-
-  //
-  // define Array utility functions
-  //
-
-  Array.prototype.max_chars = function() {
-    let max = this[0].length;
-    for (let i = 1; i < this.length; i++) if (this[i].length > max) max = this[i].length;
-    return max;
+    Object.entries({chord, caged, custom}).forEach(entry => {
+      const [chordType, chordSpec] = entry
+      this.Chords[chordName][chordType] = chordSpec
+    })
   }
+};
 
 
   //
@@ -575,9 +566,10 @@ const {jtab, jtabChord} = (function() {
   }
 
 
-  // draw a token on the tab
-  fn.tab_note = function (token) {
-    if (this.has_tab == false) return;
+// draw a token on the tab
+fn.tab_note = function (token) {
+  if (this.has_tab == false) return;
+  const maxNoteChars = (arr) => Math.max(...arr.map(s => s.length))
 
     if ( token.match( /\$/ ) != null ) { // contains a string specifier
       if ( token.match( /\./ ) != null ) { // is a multi-string specifier
@@ -599,27 +591,27 @@ const {jtab, jtabChord} = (function() {
         }
         this.increment_offset( width );
 
-      } else { // just a string setting
-        this.tab_current_string = this.get_string_number(token);
+    } else { // just a string setting
+      this.tab_current_string = this.get_string_number(token);
+    }
+  } else {
+    const fullchord_notes = this.get_fullchord_notes(token);
+    if ( fullchord_notes ) {
+      const max_chars = maxNoteChars(fullchord_notes);
+      const width = this.tab_char_width * (max_chars + 2);
+      this.tab_extend( width );
+      for (let i = 0; i < fullchord_notes.length ; i++) {
+        this.draw_tab_note( 6 - i, fullchord_notes[i], width * 0.5 );
       }
-    } else {
-      const fullchord_notes = this.get_fullchord_notes(token);
-      if ( fullchord_notes ) {
-        const max_chars = fullchord_notes.max_chars();
-        const width = this.tab_char_width * (max_chars + 2);
-        this.tab_extend( width );
-        for (let i = 0; i < fullchord_notes.length ; i++) {
-          this.draw_tab_note( 6 - i, fullchord_notes[i], width * 0.5 );
-        }
-        this.increment_offset( width );
-      } else if ( this.tab_current_string > 0 ) { // else draw literal, but only if a current string selected
-        const width = this.tab_char_width * ( token.length + 2 );
-        this.tab_extend( width );
-        this.draw_tab_note( this.tab_current_string, token, width * 0.5 );
-        this.increment_offset( width );
-      }
+      this.increment_offset( width );
+    } else if ( this.tab_current_string > 0 ) { // else draw literal, but only if a current string selected
+      const width = this.tab_char_width * ( token.length + 2 );
+      this.tab_extend( width );
+      this.draw_tab_note( this.tab_current_string, token, width * 0.5 );
+      this.increment_offset( width );
     }
   }
+}
 
 
   // main drawing routine entry point: to render a token - chord or tab
@@ -765,15 +757,11 @@ const {jtab, jtabChord} = (function() {
     document.querySelector('.jtab').not('.rendered').each( function(name, index) { jtab.render(this); } );
   }
 
-  // initialize jtab library.
-  // Sets up to run implicit rendering on window.onload
+// initialize jtab library.
+// Sets up to run implicit rendering on window.onload
+window.onload = function() {
+  jtab.renderimplicit(null);
+}
 
-
-  window.onload = function() {
-    jtab.renderimplicit();
-  }
-
-  return {jtab, jtabChord}
-})();
-
+/* - jTab Guitar Codeblocks Addition - */
 export {jtab, jtabChord}

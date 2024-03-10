@@ -3,7 +3,7 @@ import process from "process";
 import builtins from 'builtin-modules'
 import {sassPlugin} from 'esbuild-sass-plugin'
 
-const banner  = `/* Obsidian jTab Community plugin: https://github.com/davfive/obsidian-jtab */`;
+const banner  = `/* jTab Guitar Codeblocks for Obsidian community plugin: https://github.com/davfive/obsidian-jtab */`;
 
 const prod = (process.argv[2] === 'production');
 
