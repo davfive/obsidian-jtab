@@ -127,16 +127,6 @@ const jtab = {
   }
 };
 
-//
-// define Array utility functions
-//
-
-Array.prototype.max_chars = function() {
-  let max = this[0].length;
-  for (let i = 1; i < this.length; i++) if (this[i].length > max) max = this[i].length;
-  return max;
-}
-
 
 //
 // define jtabChord class
@@ -590,6 +580,7 @@ fn.get_fullchord_notes = function (token) {
 // draw a token on the tab
 fn.tab_note = function (token) {
   if (this.has_tab == false) return;
+  const maxNoteChars = (arr) => Math.max(...arr.map(s => s.length))
 
   if ( token.match( /\$/ ) != null ) { // contains a string specifier
     if ( token.match( /\./ ) != null ) { // is a multi-string specifier
@@ -617,7 +608,7 @@ fn.tab_note = function (token) {
   } else {
     const fullchord_notes = this.get_fullchord_notes(token);
     if ( fullchord_notes ) {
-      const max_chars = fullchord_notes.max_chars();
+      const max_chars = maxNoteChars(fullchord_notes);
       const width = this.tab_char_width * (max_chars + 2);
       this.tab_extend( width );
       for (let i = 0; i < fullchord_notes.length ; i++) {
@@ -779,12 +770,8 @@ jtab.renderimplicit = function(within_scope) {
 
 // initialize jtab library.
 // Sets up to run implicit rendering on window.onload
-jtab.init = function() {
-  const oldonload = window.onload;
-  window.onload = function() {
-    if (typeof oldonload == 'function') oldonload();
-    jtab.renderimplicit(null);
-  }
+window.onload = function() {
+  jtab.renderimplicit(null);
 }
 
 /* - Obsidian jTab Addition - */
