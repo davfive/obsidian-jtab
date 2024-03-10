@@ -1,7 +1,7 @@
 import Color from 'color'
 import {IjTabColors} from './jtab-settings'
 
-export {jtab} from '../assets/js/jtab.tardate'
+export {jtab} from './jtab-tardate'
 
 // Ideally I would just pull this verbatim from the README.md file but esbuild won't let me
 export const jTabAboutMarkdown = `

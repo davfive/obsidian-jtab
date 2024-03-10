@@ -1,112 +1,144 @@
-/* - Obsidian jTab Addition - */
-// import Raphael, { fn } from "raphael";
-import ChordLibrary from "./jtab.chords";
+import { cloneDeep } from 'lodash';
+import { ChordLibrary, WesternScale } from "./jtab.library";
+/**
+ * JTab - Javascript/CSS Guitar Chord and Tab Notation for the Web.
+ * Version 1.3.1
+ * Written by Paul Gallagher (http://tardate.com), 2009. (original version and maintainer)
+ * Contributions:
+ *   Jason Ong (https://github.com/jasonong)
+ *   Bruno Bornsztein (https://github.com/bborn)
+ *   Binary Bit LAN (https://github.com/binarybitlan)
+ * See:
+ *   http://jtab.tardate.com : more information on availability, configuration and use.
+ *   http://github.com/tardate/jtab/tree/master : source code repository, wiki, documentation
+ *
+ * This library also depends on the following two libraries that must be loaded for it to work:
+ *   jQuery - http://www.jquery.com/
+ *   Raphael - http://raphaeljs.com/
+ *
+ *
+ * This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this library; if not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 
-const {jtab, jtabChord} = (function() {
-  const fn = {}
-  const Raphael = {fn}
-  /**
-   * JTab - Javascript/CSS Guitar Chord and Tab Notation for the Web.
-   * Version 1.3.1
-   * Written by Paul Gallagher (http://tardate.com), 2009. (original version and maintainer)
-   * Contributions:
-   *   Jason Ong (https://github.com/jasonong)
-   *   Bruno Bornsztein (https://github.com/bborn)
-   *   Binary Bit LAN (https://github.com/binarybitlan)
-   * See:
-   *   http://jtab.tardate.com : more information on availability, configuration and use.
-   *   http://github.com/tardate/jtab/tree/master : source code repository, wiki, documentation
-   *
-   * This library also depends on the following two libraries that must be loaded for it to work:
-   *   jQuery - http://www.jquery.com/
-   *   Raphael - http://raphaeljs.com/
-   *
-   *
-   * This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-   * Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option)
-   * any later version.
-   *
-   * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-   * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
-   * details.
-   *
-   * You should have received a copy of the GNU Lesser General Public License along with this library; if not, write to
-   * the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-   */
+import Raphael from "raphael"
+declare module "raphael" {
+  // See raphael.d.ts for the typescript recommendation
+  interface RaphaelPaper {
+    tabtype: number;
+    has_chord: boolean;
+    has_tab: boolean;
+    debug: boolean;
+    scale: number;
+    margin_top: number;
+    margin_bottom: number;
+    margin_left: number;
+    margin_right: number;
+    current_offset: number;
+    string_spacing: number;
+    strings_drawn: number;
+    fret_spacing: number;
+    frets_drawn: number;
+    note_radius: number;
+    fret_width: number;
+    fret_height: number;
+    chord_width: number;
+    chord_height: number;
+    tab_current_string: number;
+    tab_margin_top: number;
+    tab_top: number;
+    tab_spacing: number;
+    tab_height: number;
+    tab_char_width: number;
+    total_height: number;
+    color: string;
+    fingering_text_color: string;
+    tab_text_color: string;
+    debug_grid(width: number): void;
+    increment_offset(width: number): void;
+    svg_params(x: number, y: number, l1: number, l2: number): string;
+    chord_fretboard(position: number, chord_name: string): void;
+    stroke(): void;
+    bar(): void;
+    doublebar(): void;
+    chord_note(position: number, string_number: number, note: [number, number]): void;
+    tab_extend(width: number): void;
+    tab_start(): void;
+    draw_tab_note(a: number, b: number, c: number): void;
+  }
+}
 
-  //
-  // define the jtab class
-  //
+type JtabStringSpecType = [number] | [number, number]; // [fret[, finger]]
+type JtabChordSpecType = [number, ...Array<JtabStringSpecType>];
 
-  const jtab = {
-    Version : '1.3.1',
-    element_count:0, //TODO:
-    Strings : {
-      AboutDialog : '<html><head><title>About jTab</title></head><body style=""><p style="">jTab version: {V}</p><p><a href="http://jtab.tardate.com" target="_blank">http://jtab.tardate.com</a></p><p><input type="button" class="close" value="OK" onClick="window.close()"/></p></body></html>'
-    },
-    Chords : ChordLibrary,
-    WesternScale: {
-      BaseNotes:  { // for each: array[ translated western scale note, caged base, base fret ]
-        'C' : [ 'C' , 'C', 0 ],
-        'C#': [ 'C#', 'C', 1 ],
-        'Db': [ 'C#', 'C', 1 ],
-        'D' : [ 'D' , 'D', 0 ],
-        'D#': [ 'Eb', 'D', 1 ],
-        'Eb': [ 'Eb', 'D', 1 ],
-        'E' : [ 'E' , 'E', 0 ],
-        'F' : [ 'F' , 'E', 1 ],
-        'F#': [ 'F#', 'E', 2 ],
-        'Gb': [ 'F#', 'E', 2 ],
-        'G' : [ 'G' , 'G', 0 ],
-        'G#': [ 'G#', 'G', 1 ],
-        'Ab': [ 'G#', 'G', 1 ],
-        'A' : [ 'A' , 'A', 0 ],
-        'A#': [ 'Bb', 'A', 1 ],
-        'Bb': [ 'Bb', 'A', 1 ],
-        'B' : [ 'B' , 'A', 2 ]
-      },
-      BaseIntervals: ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']
-    },
-    getChordList : function() {
-      const sortOrder = []
-      'CDEFGAB'.split('').forEach(k => ['','#','b'].forEach(a => ['','m'].forEach(mm => sortOrder.push(k+a+mm))))
-      const chordBase = chordName => (chordName.match(/^([CDEFGAB][#b]{0,1}(?:m(?!aj))?)/)||[])[0]
-      const chordSortValue = chordName => sortOrder.indexOf(chordBase(chordName))
-      const sortChords = (a, b) => chordSortValue(a) - chordSortValue(b)
+type JtabChordSetNameType = 'chord' | 'caged' | 'custom';
+type JtabChordSetType = Partial<Record<JtabChordSetNameType, JtabChordSpecType>>;
+type JtabChordLibraryType = {[index: string]: JtabChordSetType};
 
-      return Object.keys(jtab.Chords).sort(sortChords)
-    },
+Array.prototype.max_chars = function() {
+  let max = this[0].length;
+  for (let i = 1; i < this.length; i++) if (this[i].length > max) max = this[i].length;
+  return max;
+}
 
-    isValidStringSpec: stringSpec => {
-      if (! Array.isArray(stringSpec) || [1,2].includes(stringSpec.length)) {
-        return false
-      }
-      const [fret, finger] = stringSpec
-      if (! Number.isNumber(fret) || fret < -1) {
-        return false
-      }
-      if ([-1, 0].includes(fret) && finger != null) {
-        return false
-      }
-      if (fret > 0 && !Number.isNumber(finger)) {
-        return false
-      }
-      return true
-    },
+export class Jtab {
+  static Version = '1.3.1';
+  static Strings: {
+    AboutDialog : '<html><head><title>About jTab</title></head><body style=""><p style="">jTab version: {V}</p><p><a href="http://jtab.tardate.com" target="_blank">http://jtab.tardate.com</a></p><p><input type="button" class="close" value="OK" onClick="window.close()"/></p></body></html>'
+  };
+  Chords: JtabChordLibraryType = ChordLibrary;
+  element_count = 0; //TODO
 
-    isValidChordSpec: chordSpec => {
-      if (! Array.isArray(chordSpec) || chordSpec.length !== 7) {
-        return false
-      }
-      const baseFret = chordSpec[0]
-      if (!Number.isInteger(baseFret) || baseFret < 0) {
-        return false
-      }
-      
-      return chordSpec.slice(1).every(jtab.isValidStringSpec)
-    },
+  getChordList() {
+    const sortOrder: Array<string> = []
+    'CDEFGAB'.split('').forEach(k => ['','#','b'].forEach(a => ['','m'].forEach(mm => sortOrder.push(k+a+mm))))
+    const chordBase = (chordName: string) => (chordName.match(/^([CDEFGAB][#b]{0,1}(?:m(?!aj))?)/)||[])[0]
+    const chordSortValue = (chordName: string) => sortOrder.indexOf(chordBase(chordName))
+    const sortChords = (a: string, b: string) => chordSortValue(a) - chordSortValue(b)
 
-    /*
+    return Object.keys(this.Chords).sort(sortChords)
+  }
+
+  isValidStringSpec(stringSpec: JtabStringSpecType) {
+    if (! Array.isArray(stringSpec) || [1,2].includes(stringSpec.length)) {
+      return false
+    }
+    const [fret, finger] = stringSpec
+    if (! Number.isNumber(fret) || fret < -1) {
+      return false
+    }
+    if ([-1, 0].includes(fret) && finger != null) {
+      return false
+    }
+    if (fret > 0 && !Number.isNumber(finger)) {
+      return false
+    }
+    return true
+  }
+
+  isValidChordSpec(chordSpec: JtabChordSpecType) {
+    if (! Array.isArray(chordSpec) || chordSpec.length !== 7) {
+      return false
+    }
+
+
+    const baseFret = chordSpec[0]
+    if (!Number.isInteger(baseFret) || baseFret < 0) {
+      return false
+    }
+    
+    return chordSpec.slice(1).every((pair: [number, number]) => this.isValidStringSpec(pair))
+  }
+
+  /*
     * Usage: jtab.AddChord("ChordName", Chord-Array)
     * Example of Add: jtab.AddChord("Dsus4l", {
     *    open: [ 0, [-1 ],  [-1 ],  [3,2],  [2,1],  [3,3],  [3,4] ], 
@@ -114,51 +146,57 @@ const {jtab, jtabChord} = (function() {
     * });
     * Example of Update: jtab.AddChord("A", {open: [ 0, [-1],  [0  ],  [2,3],  [2,2],  [2,1],  [0  ]})
     */
-    AddChord : function(chordName, {chord,caged, custom} = {}) {
-      if (! [chord, caged, custom].every(s => s == null || this.isValidChordSpec(s))) {
-        return false
+  AddChord(chordName: string, chordSet: JtabChordSetType): boolean {
+    for (const setType in chordSet) {
+      if (! this.isValidChordSpec(chordSet[setType as JtabChordSetNameType])) {
+        return false;
       }
-
-      if (! (chordName in this.Chords)) {
-        this.Chords[chordName] = {}
-      }
-      Object.entries({chord, caged, custom}).forEach(entry => {
-        const [chordType, chordSpec] = entry
-        this.Chords[chordName][chordType] = chordSpec
-      })
     }
+
+    this.Chords[chordName] = chordSet;
+    return true;
+  }
+}
+
+//
+// define jtabChord class
+// public members:
+//  isValid        = whether valid chord defined
+//  isCaged        = whether chord is CAGED type
+//  isCustom       = whether chord is a custom fingering
+//  fullChordName  = full chord name, including position e.g. D#m7:3
+//  chordName      = chord name, without position e.g. D#m7
+//  baseName       = translated chord name (B <-> #), without position e.g. Ebm7
+//  rootNote       = root note e.g. D#
+//  rootExt        = root note extension e.g. m7
+//  cagedBaseShape = caged base shape e.g. D
+//  cagedBaseFret  = caged base fret e.g. 0
+//  cagedPos       = caged position e.g. 3
+//
+export class JtabChord {
+
+}
+
+
+const {jtab, jtabChord} = (function() {
+
+  //
+  // define the jtab class
+  //
+  
+  const jtab = {
+
+    
   };
 
   //
   // define Array utility functions
   //
 
-  Array.prototype.max_chars = function() {
-    let max = this[0].length;
-    for (let i = 1; i < this.length; i++) if (this[i].length > max) max = this[i].length;
-    return max;
-  }
 
+  function jtabChord (token: string) {
 
-  //
-  // define jtabChord class
-  // public members:
-  //  isValid        = whether valid chord defined
-  //  isCaged        = whether chord is CAGED type
-  //  isCustom       = whether chord is a custom fingering
-  //  fullChordName  = full chord name, including position e.g. D#m7:3
-  //  chordName      = chord name, without position e.g. D#m7
-  //  baseName       = translated chord name (B <-> #), without position e.g. Ebm7
-  //  rootNote       = root note e.g. D#
-  //  rootExt        = root note extension e.g. m7
-  //  cagedBaseShape = caged base shape e.g. D
-  //  cagedBaseFret  = caged base fret e.g. 0
-  //  cagedPos       = caged position e.g. 3
-  //
-
-  function jtabChord (token) {
-
-    this.scale = jtab.WesternScale;
+    this.scale = cloneDeep(WesternScale);
     this.baseNotes = this.scale.BaseNotes;
     this.baseChords = jtab.Chords;
     this.chordArray = null;
@@ -240,13 +278,13 @@ const {jtab, jtabChord} = (function() {
       .map(pair => parseInt(pair[0]))
       .filter(i => i > 0) // -1=X, 0=open
 
-    const min = Math.min.apply( Math, fingeredFrets );
+    const min = Math.min(...fingeredFrets)
 
     array.unshift(min-1);
     return array;
   };
 
-  jtabChord.prototype.setChordArray = function(chordName) { // clones chord array (position 0) from chord ref data into this object
+  jtabChord.prototype.setChordArray = function(chordName: string) { // clones chord array (position 0) from chord ref data into this object
     this.chordArray = [];
     if (this.baseChords[chordName] === undefined ) {
       this.isValid = false;
@@ -284,7 +322,7 @@ const {jtab, jtabChord} = (function() {
     this.shiftChordArray(starting_fret,modelChord);
   };
 
-  jtabChord.prototype.shiftChordArray = function(atFret,modelChord) { // shift chord to new fret position
+  jtabChord.prototype.shiftChordArray = function(atFret: number, modelChord: string) { // shift chord to new fret position
     const initFret = this.chordArray[0];
     if (atFret != initFret) {
       const use_caged_fingering = this.isCaged && this.cagedPos > 0 && 'caged' in this.baseChords[modelChord];
@@ -303,47 +341,46 @@ const {jtab, jtabChord} = (function() {
   //
   // define extensions to the Raphael class
   //
+  Raphael.fn.tabtype = 0;  // 0 = none, 1 = tab & chord, 2 = chord, 3 = tab
+  Raphael.fn.has_chord = false;
+  Raphael.fn.has_tab = false;
 
-  fn.tabtype = 0;  // 0 = none, 1 = tab & chord, 2 = chord, 3 = tab
-  fn.has_chord = false;
-  fn.has_tab = false;
+  Raphael.fn.debug = false;
+  Raphael.fn.scale = 1;
+  Raphael.fn.margin_top = 36;
+  Raphael.fn.margin_bottom = 10;
+  Raphael.fn.margin_left = 16;
+  Raphael.fn.margin_right = 10;
 
-  fn.debug = false;
-  fn.scale = 1;
-  fn.margin_top = 36;
-  fn.margin_bottom = 10;
-  fn.margin_left = 16;
-  fn.margin_right = 10;
+  Raphael.fn.current_offset = Raphael.fn.margin_left;
 
-  fn.current_offset = fn.margin_left;
+  Raphael.fn.string_spacing = 16;
+  Raphael.fn.strings_drawn = 6;
+  Raphael.fn.fret_spacing = 16;
+  Raphael.fn.frets_drawn = 4;
+  Raphael.fn.note_radius = 7;
 
-  fn.string_spacing = 16;
-  fn.strings_drawn = 6;
-  fn.fret_spacing = 16;
-  fn.frets_drawn = 4;
-  fn.note_radius = 7;
+  Raphael.fn.fret_width = Raphael.fn.string_spacing * ( Raphael.fn.strings_drawn - 1 );
+  Raphael.fn.fret_height = Raphael.fn.fret_spacing * (Raphael.fn.frets_drawn + 0.5);
+  Raphael.fn.chord_width = Raphael.fn.margin_left + Raphael.fn.fret_width + Raphael.fn.string_spacing + Raphael.fn.margin_right;
+  Raphael.fn.chord_height = Raphael.fn.margin_top + Raphael.fn.fret_height + Raphael.fn.margin_bottom;
 
-  fn.fret_width = fn.string_spacing * ( fn.strings_drawn - 1 );
-  fn.fret_height = fn.fret_spacing * (fn.frets_drawn + 0.5);
-  fn.chord_width = fn.margin_left + fn.fret_width + fn.string_spacing + fn.margin_right;
-  fn.chord_height = fn.margin_top + fn.fret_height + fn.margin_bottom;
+  Raphael.fn.tab_current_string = 0; // 1,2,3,4,5,6 or 0 = not set
+  Raphael.fn.tab_margin_top = 10;
+  Raphael.fn.tab_top = Raphael.fn.chord_height + Raphael.fn.tab_margin_top;
+  Raphael.fn.tab_spacing = Raphael.fn.fret_spacing;
+  Raphael.fn.tab_height = Raphael.fn.tab_spacing * 5;
+  Raphael.fn.tab_char_width = 8;
 
-  fn.tab_current_string = 0; // 1,2,3,4,5,6 or 0 = not set
-  fn.tab_margin_top = 10;
-  fn.tab_top = fn.chord_height + fn.tab_margin_top;
-  fn.tab_spacing = fn.fret_spacing;
-  fn.tab_height = fn.tab_spacing * 5;
-  fn.tab_char_width = 8;
+  Raphael.fn.total_height = Raphael.fn.tab_top + Raphael.fn.tab_height + Raphael.fn.margin_bottom;
 
-  fn.total_height = fn.tab_top + fn.tab_height + fn.margin_bottom;
-
-  fn.color = "#000";
-  fn.fingering_text_color = "#fff";
-  fn.tab_text_color = "#000";
+  Raphael.fn.color = "#000";
+  Raphael.fn.fingering_text_color = "#fff";
+  Raphael.fn.tab_text_color = "#000";
 
 
   // debug helper - puts grid marks on the rendered image
-  fn.debug_grid = function (width) {
+  Raphael.fn.debug_grid = function (width) {
     // h ticks
     this.path(this.svg_params(this.current_offset, 0,0,4)).attr({stroke: this.color, "stroke-width":0.2 })
     this.path(this.svg_params(  this.current_offset + this.margin_left, 0,0,2)).attr({stroke: this.color, "stroke-width":0.2 })
@@ -358,21 +395,21 @@ const {jtab, jtabChord} = (function() {
 
 
   // step the current position for drawing
-  fn.increment_offset = function (width) {
+  Raphael.fn.increment_offset = function (width) {
     if (width == null) width = this.chord_width
     if (this.debug) this.debug_grid(width);
     this.current_offset += width;
     this.setSize( this.current_offset, this.total_height );
   }
 
-  fn.svg_params = function(x,y,l1,l2) {
+  Raphael.fn.svg_params = function(x,y,l1,l2) {
     // http://www.w3.org/TR/SVG/paths.html#PathData --helpful reading
     const move_line_to = "m"+x+" "+y+"l"+l1+" "+l2
     if(arguments.length == 4) return move_line_to
   }
 
   // draw the fretboard
-  fn.chord_fretboard = function ( position, chord_name ) {
+  Raphael.fn.chord_fretboard = function ( position, chord_name ) {
     const fret_left = this.current_offset + this.margin_left;
     // conventional fret labels
     const fret_labels = [ '', '', '', 'III', '', 'V', '', 'VII', '', 'IX', '', '', 'XII', '', '', 'XV', '', 'XVII', '', 'XIX', '', 'XXI', '' ];
@@ -409,7 +446,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // draw a stroke (/)
-  fn.stroke = function () {
+  Raphael.fn.stroke = function () {
 
     if (this.has_tab) {
       const width = this.tab_char_width * 3;
@@ -432,7 +469,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // draw a bar
-  fn.bar = function () {
+  Raphael.fn.bar = function () {
     let bar_stroke
     if (this.has_tab) {
       const width = this.tab_char_width * 2;
@@ -451,7 +488,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // draw double bar
-  fn.doublebar = function () {
+  Raphael.fn.doublebar = function () {
     let path_1, path_2
     if (this.has_tab) {
       const width = this.tab_char_width + 8;
@@ -477,7 +514,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // draw a note in a chord
-  fn.chord_note = function (position, string_number, note) {
+  Raphael.fn.chord_note = function (position, string_number, note) {
     // NB: internal string_number in chords counts from low to high
     const fret_number = note[0];
     const fret_left = this.current_offset + this.margin_left;
@@ -507,7 +544,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // extend the tab drawing area
-  fn.tab_extend = function (width) {
+  Raphael.fn.tab_extend = function (width) {
     if (this.has_tab == false) return;
     for (let i = 0; i < this.strings_drawn; i++ ) {
       this.path(this.svg_params(this.current_offset, this.tab_top  + (i * this.tab_spacing),width, 0)).attr({stroke: this.color})
@@ -516,7 +553,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // start the tab
-  fn.tab_start = function () {
+  Raphael.fn.tab_start = function () {
     if (this.has_tab == false) return;
     const width = this.tab_char_width * 3;
     //  start bar
@@ -535,7 +572,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // draw an individual note in the tab
-  fn.draw_tab_note = function (string_number, token, left_offset) {
+  Raphael.fn.draw_tab_note = function (string_number, token, left_offset) {
     // NB: internal string_number in tab counts from high to low
     this.text(this.current_offset + left_offset,
             this.tab_top + this.tab_spacing * (string_number - 1),
@@ -543,7 +580,7 @@ const {jtab, jtabChord} = (function() {
   }
 
   // gets string number from token $[1-6|EADGBe]
-  fn.get_string_number = function (token) {
+  Raphael.fn.get_string_number = function (token) {
     let string_number = null;
     if ( token.match( /^\$[1-6]/ ) != null ) {
       string_number = token.substr(1,1);
@@ -558,7 +595,7 @@ const {jtab, jtabChord} = (function() {
   // returns:
   //   false = not a full chord representation
   //   array = array of notes (low to high)
-  fn.get_fullchord_notes = function (token) {
+  Raphael.fn.get_fullchord_notes = function (token) {
     let rc = false;
     // eslint-disable-next-line no-useless-escape
     if ( token.match(/[^\.xX0-9]/) != null ) {
@@ -576,7 +613,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // draw a token on the tab
-  fn.tab_note = function (token) {
+  Raphael.fn.tab_note = function (token) {
     if (this.has_tab == false) return;
 
     if ( token.match( /\$/ ) != null ) { // contains a string specifier
@@ -623,7 +660,7 @@ const {jtab, jtabChord} = (function() {
 
 
   // main drawing routine entry point: to render a token - chord or tab
-  fn.render_token = function (token) {
+  Raphael.fn.render_token = function (token) {
 
     const c = new jtabChord(token);
 
@@ -677,27 +714,27 @@ const {jtab, jtabChord} = (function() {
     const gotChord =  gotNormalChord || gotCustomChord ;
 
     // set defaults - apply scaling here (TODO)
-    fn.current_offset = fn.margin_left;
+    Raphael.fn.current_offset = Raphael.fn.margin_left;
     if ( gotChord && gotTab ) { // chord and tab
       tabtype = 1;
-      fn.has_chord = true;
-      fn.has_tab = true;
-      fn.tab_top = fn.chord_height + fn.tab_margin_top;
-      fn.total_height = fn.tab_top + fn.tab_height + fn.margin_bottom;
+      Raphael.fn.has_chord = true;
+      Raphael.fn.has_tab = true;
+      Raphael.fn.tab_top = Raphael.fn.chord_height + Raphael.fn.tab_margin_top;
+      Raphael.fn.total_height = Raphael.fn.tab_top + Raphael.fn.tab_height + Raphael.fn.margin_bottom;
     } else if ( gotChord ) { // chord only
       tabtype = 2;
-      fn.has_chord = true;
-      fn.has_tab = false;
-      fn.tab_top = fn.chord_height + fn.tab_margin_top;
-      fn.total_height = fn.chord_height;
+      Raphael.fn.has_chord = true;
+      Raphael.fn.has_tab = false;
+      Raphael.fn.tab_top = Raphael.fn.chord_height + Raphael.fn.tab_margin_top;
+      Raphael.fn.total_height = Raphael.fn.chord_height;
     } else if ( gotTab ) { // tab only
       tabtype = 3;
-      fn.has_chord = false;
-      fn.has_tab = true;
-      fn.tab_top = fn.tab_margin_top;
-      fn.total_height = fn.tab_top + fn.tab_height + fn.margin_bottom;
+      Raphael.fn.has_chord = false;
+      Raphael.fn.has_tab = true;
+      Raphael.fn.tab_top = Raphael.fn.tab_margin_top;
+      Raphael.fn.total_height = Raphael.fn.tab_top + Raphael.fn.tab_height + Raphael.fn.margin_bottom;
     }
-    fn.tabtype = tabtype;
+    Raphael.fn.tabtype = tabtype;
     return tabtype;
   }
 
@@ -721,14 +758,14 @@ const {jtab, jtabChord} = (function() {
     if (!fgColor) {
       fgColor = '#000';
     }
-    fn.color = fgColor;
-    fn.tab_text_color = fgColor;
+    Raphael.fn.color = fgColor;
+    Raphael.fn.tab_text_color = fgColor;
 
     let bgColor = jtab.getStyle( document.querySelector(element), 'background-color' );
     if (!bgColor || (bgColor == 'transparent') || (bgColor == 'rgba(0, 0, 0, 0)')) {
       bgColor = '#fff';
     }
-    fn.fingering_text_color = bgColor;
+    Raphael.fn.fingering_text_color = bgColor;
   }
 
   // Render the tab for a given +element+.
@@ -745,11 +782,11 @@ const {jtab, jtabChord} = (function() {
     const rndID="builder_"+jtab.element_count++;
 
     // add the Raphael canvas in its own DIV. this gets around an IE6 issue with not removing previous renderings
-    const canvas_holder = document.querySelector('<div id="'+rndID+'"></div>').css({height: fn.total_height});
+    const canvas_holder = document.querySelector('<div id="'+rndID+'"></div>').css({height: Raphael.fn.total_height});
 
     document.querySelector(element).html(canvas_holder);
     jtab.setPalette(element);
-    canvas = Raphael(rndID, 80, fn.total_height );
+    canvas = Raphael(rndID, 80, Raphael.fn.total_height );
     canvas.tab_start();
 
     const tokens = notation.split(/\s/);
