@@ -1,4 +1,4 @@
-import { App, MarkdownRenderer, PluginSettingTab, Setting, TextComponent, DropdownComponent} from 'obsidian'
+import { App, MarkdownRenderer, PluginSettingTab, Setting, TextComponent, DropdownComponent, MarkdownRenderChild} from 'obsidian'
 import {jTabAboutMarkdown, parseColorToHexa, setJTabColorStyles} from './jtab-utils'
 import jTabPlugin from './main'
 import ChordExampleSVG from '../assets/img/jtab-example-chord.svg'
@@ -100,7 +100,7 @@ export class jTabSettingsTab extends PluginSettingTab {
 
 		new Setting(elSettings.createDiv())
 			.setHeading()
-			.setName('Obsidian jTab Settings')
+			.setName('Display Settings')
 
 		// Color Scheme Type Chooser
 		new Setting(elSettings.createDiv())
@@ -147,15 +147,12 @@ export class jTabSettingsTab extends PluginSettingTab {
 			this._copyColorStylesToFields()
 		});
 
-		// About/Guide Section
-		new Setting(containerEl.createDiv())
-			.setHeading()
-			.setName('Obsidian jTab Guide')
-
+		const aboutDiv = containerEl.createDiv({cls: 'jtab-about'})
 		MarkdownRenderer.renderMarkdown(
 			jTabAboutMarkdown, 
-			containerEl.createDiv({cls: 'jtab-about'}),
-			null, null);
+			aboutDiv,
+			null,
+			new MarkdownRenderChild(aboutDiv));
 	}
 
 	async hide() {
