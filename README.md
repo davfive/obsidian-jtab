@@ -1,6 +1,6 @@
-### Obsidian jTab Guide
+### Guide for jTab Guitar Codeblocks
 
-Obsidian jTab adds the ability to show guitar chords and tabs directly in your notes.
+jTab Guitar Codeblocks adds the ability to show guitar chords and tabs directly in your notes.
 
 It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 
@@ -15,7 +15,7 @@ It uses the [jTab](https://jtab.tardate.com/) library to render the chords/tabs.
 * ```` ```jtab-chords````  
   Type an empty codeblock to see all available chords (names only). Cut/paste anything off the list into a normal jtab codeblock to see the chord charts.
 
-#### Enhancements specific to Obsidian jTab
+#### Enhancements specific to jTab Guitar Codeblocks
 1. _Supports multiple jTab lines per codeblock_  
    Each jTab line in a codeblock will be individually rendered. Blank lines will be ignored.
 
@@ -94,7 +94,7 @@ __jTab examples codeblock__
 _Community Support_
 * Thanks for @RobColes for suggesting #5 (customizing colors) and being a beta tester.
 
-_Used by Obsidian jTab_
+_Used by jTab Guitar Codeblocks_
 * [jTab](https://jtab.tardate.com/)
   * License LGPL v2.1 (it's in it's [js file](https://github.com/tardate/jtab/blob/master/javascripts/jtab.js), not in a normal GitHub license file
   	Per LGPL rules, jTab is used unmodified *execpt*I do not modify the jTab source code other than to

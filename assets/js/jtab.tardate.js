@@ -1,4 +1,4 @@
-/* - Obsidian jTab Addition - */
+/* - jTab Guitar Codeblocks Addition - */
 import jQuery, { grep } from "jquery";
 import Raphael, { fn } from "raphael";
 import ChordLibrary from "./jtab.chords";
@@ -774,6 +774,6 @@ window.onload = function() {
   jtab.renderimplicit(null);
 }
 
-/* - Obsidian jTab Addition - */
+/* - jTab Guitar Codeblocks Addition - */
 export {jtab, jtabChord}
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^^ */

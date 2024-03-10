@@ -1,7 +1,7 @@
 # How I added jTab Color Settings in Obsidian
 >This is a how-to guide on how I implemented a live preview in settings and self-updating codeblocks on the fly
 
-I just released Obsidian jTab 1.0.5 with a new settings panel for custom colors that had some odd requirements that I thought I'd share in case anyone could use the ideas (or give me tips on how to do it better).
+I just released jTab Guitar Codeblocks 1.0.5 with a new settings panel for custom colors that had some odd requirements that I thought I'd share in case anyone could use the ideas (or give me tips on how to do it better).
 
 Note: as time passes and these files change, some of these permalinks might be a bit, but not too far off, from the linked number
 
